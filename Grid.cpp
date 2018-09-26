@@ -19,7 +19,7 @@ Grid::Grid(Grid &g) {
     this->player = g.player;
     this->pos = g.pos;
 }
-
+*/
 Grid::Grid(vector<vector<Board>> b, int player, int depth, int size, int pos) {
     this->grid = b;
     this->player = player;
@@ -27,14 +27,14 @@ Grid::Grid(vector<vector<Board>> b, int player, int depth, int size, int pos) {
     this->size = size;
     this->pos = pos;
 }
-*/
+/*
 Grid Grid::play(int x, int y) {
     int grid_row = x/this->size;
     int grid_col = x%this->size;
     Board b = this->grid[grid_row][grid_col];
     int board_row = y/b.get_size();
     int board_col = y/b.get_size();
-    Grid tmp = *this;
+    Grid tmp = Grid(this->get_grid(),2-this->get_player()/2,6,3,this->get_pos());
     tmp.set_player(2-this->player/2);
     tmp.set_pos(y);
     if(this->pos == -1){
@@ -68,6 +68,20 @@ Grid Grid::play(int x, int y) {
                 return tmp;
             }
         }
+    }
+}
+*/
+
+Grid Grid::play(int x, int y) {
+    if(!this->islegal(x,y)) return *this;
+    else{
+        Grid tmp = *this;
+        tmp.set_player(2-this->player/2);
+        Board b = this->get_grid()[x/3][x%3];
+        b = b.play(y,this->player);
+        tmp.set_board(x,b);
+        tmp.set_pos(y);
+        return tmp;
     }
 }
 
@@ -112,10 +126,11 @@ vector<vector<Board>> Grid::get_grid() {
 }
 
 bool Grid::islegal(int x, int y) {
+    if(this->pos == -1) return true;
     int grid_row = x/3;
     int grid_col = x%3;
-    int board_row = x/3;
-    int board_col = x%3;
+    int board_row = y/3;
+    int board_col = y%3;
     int pos = this->pos;
     Board b = this->grid[grid_row][grid_col];
     Board b_ori = this->grid[pos/3][pos%3];
@@ -137,6 +152,10 @@ bool Grid::islegal(int x, int y) {
 
 int Grid::get_player() {
     return this->player;
+}
+
+void Grid::set_board(int x, Board d) {
+    this->grid[x/3][x%3] = d;
 }
 
 

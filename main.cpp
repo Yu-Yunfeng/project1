@@ -13,6 +13,18 @@ int main() {
 
     Grid g;
     g.display();
+    Player player1 = Player(1,6,g);
+    while(1){
+        player1.minimax(g,-10000,10000,6);
+        Grid* g1 = player1.get_next_grid();
+        g1->display();
+        int x,y;
+        cin>>x>>y;
+        Grid g2 = g1->play(--x,--y);
+        g2.display();
+        g = g2;
+        player1.set_grid(g2);
+    }
     /*
     int x,y;
     while(1){

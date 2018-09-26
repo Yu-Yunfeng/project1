@@ -172,7 +172,7 @@ double Player::minvalue(Grid grid, double alpha, double beta, int depth) {
         }
         if (br) break;
     }
-    if(this->next_grid != NULL) delete(this->next_grid);
+//    if(this->next_grid != NULL) delete(this->next_grid);
     this->next_grid = new Grid(best);
     return v;
 }
@@ -210,18 +210,32 @@ double Player::maxvalue(Grid grid, double alpha, double beta, int depth) {
         }
         if (br) break;
     }
-    if(this->next_grid != NULL) delete(this->next_grid);
+//    if(this->next_grid != NULL) delete(this->next_grid);
     this->next_grid = new Grid(best);
     return v;
 }
 
 double Player::minimax(Grid g, double alpha, double beta, int depth) {
-    if(this->player_number == g.get_player()) return maxvalue(g,INT_MIN,INT_MAX,6);
-    else return minvalue(g,INT_MIN,INT_MAX,6);
+    if(this->player_number == g.get_player()) return maxvalue(g,INT_MIN,INT_MAX,depth);
+    else return minvalue(g,INT_MIN,INT_MAX,depth);
 }
 
 double Player::heuristic(Grid g) {
+    return 1;
+}
 
+Player::Player(int playnum, int depth, Grid grid) {
+    this->player_number = playnum;
+    this->depth = depth;
+    this->grid = grid;
+}
+
+Grid *Player::get_next_grid() {
+    return this->next_grid;
+}
+
+void Player::set_grid(Grid g) {
+    this->grid = g;
 }
 
 

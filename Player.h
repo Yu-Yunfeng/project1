@@ -17,11 +17,13 @@ private:
     double alpha;
     double beta;
     Board board;
+    Grid grid;
     Board* next;
     Grid* next_grid;
 public:
     Player();
     Player(int playnum, int depth, Board board);
+    Player(int playnum, int depth, Grid grid);
     double minvalue(Board board, double alpha, double beta, int depth);
     double maxvalue(Board board, double alpha, double beta, int depth);
     double minimax(Board board, double alpha, double beta, int depth);
@@ -35,6 +37,8 @@ public:
     double minvalue(Grid grid, double alpha, double beta, int depth);
     double maxvalue(Grid grid, double alpha, double beta, int depth);
     double minimax(Grid g, double alpha, double beta, int depth);
+    Grid* get_next_grid();
+    void set_grid(Grid g);
 };
 
 

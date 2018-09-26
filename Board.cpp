@@ -47,7 +47,7 @@ Board Board::play(int i) {
     int x = (i)/this->size;
     int y = (i)%this->size;
     if(this->board[x][y] != 0) {
-        cout<<"It's not allowed"<<endl;
+//        cout<<"It's not allowed_1"<<endl;
         return *this;
     }
     else{

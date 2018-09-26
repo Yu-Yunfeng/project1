@@ -17,7 +17,7 @@ private:
 public:
     Grid();
 //    Grid(Grid& g);
-//    Grid(vector<vector<Board>> b, int player, int depth, int size, int pos);
+    Grid(vector<vector<Board>> b, int player, int depth, int size, int pos);
     Grid play(int x, int y);
     void set_player(int player);
     void set_pos(int pos);
@@ -28,5 +28,6 @@ public:
     vector<vector<Board>> get_grid();
     bool islegal(int x, int y);
     int get_player();
+    void set_board(int x, Board d);
 };
 #endif //PROJECT1_GRID_H
